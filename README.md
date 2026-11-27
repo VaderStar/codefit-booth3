@@ -3,6 +3,7 @@
 codefit · AI가 다 해주는 세상, 코딩은 왜 배울까요? → 지식은 모두의 것 → 답은 공짜 → 모두가 따라하는 수업은 이제 필요 없음 → 지금, 이 아이를 보는 눈 → 막힌 점을 모른 채 · 아이마다 다른 도움 · 무엇을 배웠을까 · 수업 데이터는 어디로 → 그래서, 코드핏(서비스 네 칸 · 맞춤 강의 · 라이브 SOS · 네 단계 고리 · 수업 리포트 · 쌓이는 커리큘럼 · 맞는 선생님) → 선생님 컴퓨터에서 바로 · 폐쇄망 → 마무리. 20장면, 약 165초. 장면별 수정 내역은 guide.md
 
 - 실행: `public/index.html`을 Chrome으로 열고 F11(전체 화면). 소리 없음, 인터넷 필요 없음. 혼자 반복 재생됨
+- 웹 주소: https://vaderstar.github.io/codefit-booth3/ (main에 올리면 자동으로 다시 배포)
 - 다른 노트북에서 (localhost:8003과 똑같이):
   ```
   git clone https://github.com/VaderStar/codefit-booth3.git
