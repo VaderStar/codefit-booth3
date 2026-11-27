@@ -1,0 +1,8 @@
+{
+  // 코드핏 부스 화면 booth3 — public/ 정적 파일만. 개인 계정, 동료 공유용. public/index.html 한 파일 + assets (outerims/booth-show/publish.sh 가 채움)
+  "name": "booth3",
+  "compatibility_date": "2026-11-20",
+  "assets": { "directory": "./public" },
+  "routes": [{ "pattern": "booth3.moomaleng.com", "custom_domain": true }],
+  "workers_dev": false
+}
