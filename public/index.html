@@ -270,13 +270,63 @@
   #s8 .scr .bar b { color: var(--l-ink); }
   #s8 .lines { position: absolute; left: 70px; top: 110px; display: flex; flex-direction: column; gap: 16px; }
   #s8 .ln { height: 46px; border-radius: 9px; background: var(--c); opacity: .9; }
-  #s8 .cmp { position: absolute; left: 56px; right: 56px; top: 96px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  #s8 .cmp .col { background: #fff; border: 1px solid var(--l-line); border-radius: 16px; padding: 22px 26px 18px; }
-  #s8 .cmp h4 { margin: 0 0 12px; font-size: 24px; font-weight: 700; color: var(--l-ink3); letter-spacing: 0; }
-  #s8 .cmp h4 b { color: var(--l-ink3); }
-  #s8 .cmp p { margin: 0; padding: 6px 12px; border-radius: 10px; font-size: 36px; line-height: 1.38; font-weight: 700; letter-spacing: -0.03em; color: var(--l-ink); transition: background .5s, color .5s; }
-  #s8.stop .cmp .df { background: rgba(255, 90, 95, .14); color: #b3261e; }
-  #s8.pass .cmp .df { background: rgba(46, 160, 90, .16); color: #1e7a43; }
+  /* 하준이 화면: 수비수 하나씩 다 시험 → 막힘 → (자리, 제친 횟수) 상태로 너비 우선 탐색. 퍼져 나가는 앞줄 · 제치고 간 칸을 색으로 구분 */
+  #s8 .q { position: absolute; left: 40px; top: 70px; font-size: 24px; font-weight: 700; color: var(--l-ink2); letter-spacing: -0.02em; }
+  #s8 .q b { color: #14834a; }
+  #s8 .q em { font-style: normal; color: #b3261e; }
+  #s8 .grd { position: absolute; left: 40px; top: 112px; width: 600px; height: 300px; border-radius: 14px; background: #e2f3e8; box-shadow: 0 0 0 2px #b9dfc6; overflow: hidden; }
+  #s8 .grd .c { position: absolute; width: 46px; height: 46px; margin: 2px; border-radius: 8px; background: rgba(255, 255, 255, .7); display: grid; place-items: center; font-size: 20px; font-weight: 700; color: #1e7a43; font-variant-numeric: tabular-nums; letter-spacing: 0; transition: background .25s; }
+  #s8 .grd .c span { opacity: 0; transform: scale(.4); transition: opacity .2s, transform .25s var(--back); }
+  #s8 .grd .c.n span { opacity: 1; transform: none; }
+  #s8 .grd .c.n { background: rgba(255, 255, 255, .95); }
+  #s8 .grd .c.d { background: #e0484e; color: #fff; }
+  #s8 .grd .c.d.n { background: #e0484e; }
+  #s8 .grd .c.bk { box-shadow: 0 0 0 4px #ffd23f, 0 0 22px rgba(255, 210, 63, .9); }
+  #s8 .grd .c.g { background: repeating-linear-gradient(45deg, #fff 0 6px, #cfe9d8 6px 9px); box-shadow: inset 0 0 0 3px #14834a; }
+  #s8 .grd .c.g.n { color: #fff; background: #14834a; font-size: 26px; }
+  #s8 .grd .c.k { color: #b4600e; }
+  #s8 .grd .c.k.n { background: #ffe4c4; }
+  #s8 .grd .c.d.n.k, #s8 .grd .c.d.n { background: #e0484e; color: #fff; }
+  #s8 .grd .c.f { background: #ffd23f !important; color: #1d1810 !important; transform: scale(1.12); box-shadow: 0 0 18px rgba(255, 196, 0, .85); z-index: 1; }
+  #s8 .grd .c { transition: background .25s, transform .2s var(--back), box-shadow .25s; }
+  #s8 .grd .c.s { background: #1d1810; color: #fff; font-size: 16px; }
+  #s8 .grd .c.s span { opacity: 1; transform: none; }
+  #s8 .res .r3 b { font-size: 40px; }
+  #s8 .res .r3 b em { color: #b4600e; }
+  #s8 .res .lg { display: inline-block; margin-left: 10px; padding: 2px 10px; border-radius: 8px; font-size: 18px; letter-spacing: 0; vertical-align: 2px; }
+  #s8 .res .lg.a { background: #fff; color: #1e7a43; box-shadow: inset 0 0 0 2px #b9dfc6; }
+  #s8 .res .lg.b { background: #ffe4c4; color: #b4600e; }
+  #s8 .res .lg.c { background: #ffd23f; color: #1d1810; }
+  #s8 .grd svg { position: absolute; left: 0; top: 0; width: 600px; height: 300px; overflow: visible; pointer-events: none; }
+  #s8 .grd .tr { fill: none; stroke: #8d8371; stroke-width: 5; stroke-dasharray: 3 9; stroke-linecap: round; opacity: 0; transition: opacity .4s; }
+  #s8 .grd .tr.v { opacity: .9; }
+  #s8 .grd .best { fill: none; stroke: #14834a; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+  #s8 .grd .ball { position: absolute; width: 32px; height: 32px; margin: -16px 0 0 -16px; border-radius: 50%; background: #fff; border: 4px solid #1d1810; box-shadow: 0 5px 12px rgba(0, 0, 0, .2); z-index: 2; }
+  #s8 .res { position: absolute; left: 40px; top: 440px; width: 600px; font-size: 26px; font-weight: 700; color: var(--l-ink2); letter-spacing: -0.02em; }
+  #s8 .res b { display: block; margin-top: 6px; font-size: 36px; white-space: nowrap; color: var(--l-ink); letter-spacing: -0.035em; }
+  #s8 .res b em { font-style: normal; color: #14834a; }
+  #s8 .res .r1 { color: #b3261e; }
+  #s8 .res > div { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .4s; }
+  #s8 .res > div.v { opacity: 1; }
+  #s8 .nt { position: absolute; left: 664px; right: 28px; top: 70px; bottom: 28px; border-radius: 18px; background: #fff; border: 1px solid var(--l-line); padding: 22px 24px; box-sizing: border-box; }
+  #s8 .nt h4 { margin: 0 0 14px; font-size: 22px; font-weight: 700; color: var(--l-ink3); letter-spacing: 0; }
+  #s8 .tries { transition: opacity .4s; }
+  #s8.lv1 .tries { opacity: 0; }
+  #s8 .tries p { margin: 0 0 12px; padding: 10px 14px; border-radius: 12px; background: #f6f2ea; font-size: 24px; font-weight: 700; color: var(--l-ink); letter-spacing: -0.02em; opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; }
+  #s8 .tries p.v { opacity: 1; transform: none; }
+  #s8 .tries p b { float: right; color: var(--l-ink2); }
+  #s8 .tries p.qq b { color: #b3261e; }
+  #s8 .tries small { display: block; margin-top: 8px; font-size: 22px; font-weight: 700; color: #b3261e; letter-spacing: -0.02em; opacity: 0; transition: opacity .3s; }
+  #s8.stop .tries small { opacity: 1; }
+  #s8 .sol { position: absolute; left: 24px; right: 24px; top: 62px; }
+  #s8 .cd { margin-bottom: 14px; padding: 14px 16px; border-radius: 14px; border: 2px solid #e8dfcc; opacity: 0; transform: translateY(16px); transition: opacity .45s, transform .55s var(--back); }
+  #s8.lv1 .cd.a, #s8.lv2 .cd.b, #s8.lv3 .cd.c { opacity: 1; transform: none; }
+  #s8 .cd small { display: inline-block; margin-bottom: 6px; padding: 4px 12px; border-radius: 8px; background: #f3e7cc; color: #8a5f12; font-size: 20px; font-weight: 700; letter-spacing: 0; }
+  #s8 .cd div { font-size: 23px; line-height: 1.4; font-weight: 700; color: var(--l-ink); letter-spacing: -0.03em; }
+  #s8 .cd div i { font-style: normal; color: #14834a; }
+  #s8 .cd.c { border-color: #ffd23f; background: #fff8dc; }
+  #s8 .cd.c div { font-size: 21px; color: #6b5a3a; }
+  #s8 .cd.c small { background: #1d1810; color: #ffd23f; }
   #s8 .side { display: flex; flex-direction: column; gap: 16px; }
   #s8 .tile { height: 214px; border-radius: 16px; background: #0d0a06; position: relative; overflow: hidden; display: grid; place-items: center; }
   #s8 .tile img { position: absolute; left: 50%; top: 16px; height: 300px; transform: translateX(-50%); }
@@ -310,7 +360,7 @@
   #s8.hl .done { background: #f9d6d3; transform: scale(.95); }
   #s8 .toast { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) translateZ(120px) scale(.6); opacity: 0; transition: .7s var(--back); background: #223220; color: var(--green); border: 2px solid #4b7a46; border-radius: 22px; padding: 26px 44px; font-size: 48px; font-weight: 700; display: flex; gap: 18px; align-items: center; white-space: nowrap; box-shadow: 0 0 90px rgba(167, 214, 160, .45); }
   #s8 .toast svg { width: 48px; height: 48px; }
-  #s8.pass .toast { opacity: 1; transform: translate(-50%, -50%) translateZ(120px) scale(1); }
+  #s8.pass.tst .toast { opacity: 1; transform: translate(-50%, -50%) translateZ(120px) scale(1); }
   #s8.pass .lamp { background: var(--green); box-shadow: 0 0 16px var(--green); }
 
   /* ---------- 9. 수업 리포트 ---------- */
@@ -778,10 +828,10 @@
   </section>
 
   <!-- 8. 수업 보조 SOS -->
-  <section class="sc dark" id="s8" data-dur="10800" data-in="zoom">
+  <section class="sc dark" id="s8" data-dur="15800" data-in="zoom">
     <div class="cam">
       <h1 class="hc">막히는 순간, 선생님 화면에<br><span class="gold">우리 아이에게 꼭 맞는 한마디가 뜹니다.</span></h1>
-      <h1 class="hc hc2 up">정답 대신, <span class="gold">스스로 고칠 실마리를 줍니다.</span></h1>
+      <h1 class="hc hc2 up">정답 대신, <span class="gold">스스로 규칙을 찾게 돕습니다.</span></h1>
       <div class="persp">
         <div class="win">
           <div class="wt">
@@ -793,9 +843,16 @@
           <div class="wb">
             <div class="scr">
               <div class="bar"><b class="kn"></b>의 화면 &nbsp;·&nbsp; <span class="pt"></span></div>
-              <div class="cmp">
-                <div class="col"><h4>예시</h4><p>생일 축하합니다</p><p>생일 축하합니다</p><p>사랑하는 지안의</p><p>생일 축하합니다</p></div>
-                <div class="col me"><h4><b class="kn"></b>이 노래</h4><p>생일 축하합니다</p><p>생일 축하합니다</p><p class="df">지안의</p><p>생일 축하합니다</p></div>
+              <div class="q">문제 · <b>가장 짧은 길</b>로 골대까지 · <em>수비수 한 명은 제칠 수 있어요</em></div>
+              <div class="grd"><div class="cells"></div><svg viewBox="0 0 600 300"><path class="tr"/><path class="best"/></svg><div class="ball"></div></div>
+              <div class="res"><div class="r3">퍼져 나가는 중<span class="lg c">지금 살펴보는 칸</span><span class="lg a">그냥 간 칸</span><span class="lg b">수비수를 제치고 간 칸</span><b>출발점에서 <em class="lvn">0</em>번 만에 갈 수 있는 칸</b></div><div class="r0">지금까지 찾은 가장 짧은 길<b class="r1"></b></div><div class="r2">모든 경우를 다 따진 답<b>가장 짧은 길 <em></em></b></div></div>
+              <div class="nt"><h4><b class="kn"></b>이 생각 노트</h4>
+                <div class="tries"></div>
+                <div class="sol">
+                  <div class="cd a"><small>추상화</small><div>경기장 = <i>칸과 칸의 연결</i><br>지금 상태 = <i>(자리, 제친 횟수)</i></div></div>
+                  <div class="cd b"><small>알고리즘</small><div>가까운 칸부터 퍼져 나가며<br>몇 번 만에 가는지 기록<br><i>너비 우선 탐색 · 모든 경우를 한 번에</i></div></div>
+                  <div class="cd c"><small>한 번에</small><div>칸마다 딱 한 번씩만 살펴봅니다<br>수비수 10명을 하나씩 안 해 봐도 돼요</div></div>
+                </div>
               </div>
             </div>
             <div class="side">
@@ -1029,9 +1086,9 @@ function flash(bg) { const f = $('#flash'); f.style.background = bg; restart(f, 
 
 /* ---------- 장면별: build(처음 한 번) · enter(들어올 때) · render(장면 시간) · cues(한 번 터지는 일) ---------- */
 const HERO = 'hajun';   // 조용히 막힘
-// 생일 축하 노래: 예시와 하준이 노래의 셋째 줄이 다름 → 선생님이 건네는 한마디 (연출 문구, 정답은 말하지 않음)
-const HINT = '예시 셋째 줄이랑 하준이 노래 셋째 줄, 무엇이 다른지 한번 비교해 볼래?';
-const HINT_S = '셋째 줄을 예시와 비교해 볼래?';
+// 수비수 한 명을 제칠 수 있는 최단 경로: 수비수를 하나씩 다 시험하다 막힘 → 선생님 한마디는 '가까운 칸부터 적어 보게' (연출 문구, 정답은 말하지 않음)
+const HINT = '수비수를 하나씩 다 해 보는 대신, 출발점에서 가까운 칸부터 몇 번 만에 가는지 적어 볼래?';
+const HINT_S = '가까운 칸부터 몇 번 만에 가는지 적어 볼래?';
 const SCN = {};
 
 // 1. 막혀도 말하지 않음 — 하준의 실제 첫 알림 (90초)
@@ -1179,30 +1236,99 @@ SCN.s7 = {
 };
 
 // 8. 수업 보조 SOS — 하준: 실제 알림 이유 · 튜터 모델 첫 대사('질문으로 이끌기')
+// 경기장 6×12, 수비수 열 명(벽 두 줄), 수비수 한 명까지 제칠 수 있음 → (자리, 제친 횟수) 상태로 너비 우선 탐색
+const S8R = 6, S8C = 12, S8S = [2, 0], S8G = [3, 11];
+const S8DEF = [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [0, 8], [1, 8], [2, 8], [3, 8], [4, 8]];
+const S8T = { pass: 8300, lv1: 8500, wave: 8800, ws: 180, lv2: 9800, path: 12400, lv3: 11600, hc: 14300 };
+const s8xy = ([r, c]) => [c * 50 + 25, r * 50 + 25];
+const s8isD = (r, c) => S8DEF.some(([a, b]) => a === r && b === c);
+function s8bfs(maxB, only) {
+  const key = (r, c, b) => (r * S8C + c) * 2 + b, D = new Map(), P = new Map(), q = [[S8S[0], S8S[1], 0]];
+  D.set(key(S8S[0], S8S[1], 0), 0);
+  while (q.length) {
+    const [r, c, b] = q.shift(), d = D.get(key(r, c, b));
+    for (const [dr, dc] of [[0, 1], [1, 0], [-1, 0], [0, -1]]) {
+      const nr = r + dr, nc = c + dc;
+      if (nr < 0 || nc < 0 || nr >= S8R || nc >= S8C) continue;
+      let nb = b;
+      if (s8isD(nr, nc)) { if (b >= maxB || (only && !(only[0] === nr && only[1] === nc))) continue; nb = b + 1; }
+      const k = key(nr, nc, nb);
+      if (D.has(k)) continue;
+      D.set(k, d + 1); P.set(k, key(r, c, b)); q.push([nr, nc, nb]);
+    }
+  }
+  const cell = Array.from({ length: S8R * S8C }, (_, i) => { const a = [D.get(i * 2), D.get(i * 2 + 1)].filter(x => x !== undefined); return a.length ? Math.min(...a) : -1; });
+  const gk = [key(S8G[0], S8G[1], 0), key(S8G[0], S8G[1], 1)].filter(k => D.has(k)).sort((x, y) => D.get(x) - D.get(y))[0];
+  const path = [];
+  for (let k = gk; k !== undefined; k = P.get(k)) path.unshift([((k >> 1) / S8C) | 0, (k >> 1) % S8C]);
+  const cell0 = Array.from({ length: S8R * S8C }, (_, i) => D.has(i * 2) ? D.get(i * 2) : -1);
+  return { cell, cell0, len: D.get(gk), path };
+}
+const s8d = pts => pts.map((p, i) => (i ? 'L' : 'M') + s8xy(p).join(' ')).join(' ');
 SCN.s8 = {
   build(el) {
-    const k = K[HERO], a = alertOf(HERO), tu = firstTutor(HERO, 'lora');
+    const k = K[HERO];
     $$('.kn', el).forEach(x => { x.textContent = k.name; });
-    setTxt(el.querySelector('.pt'), k.title);
+    setTxt(el.querySelector('.pt'), '축구 · 가장 짧은 길 찾기');
+    this.all = s8bfs(1); this.go = s8bfs(0);
+    const t1 = s8bfs(1, S8DEF[0]);
+    let h = '';
+    for (let r = 0; r < S8R; r++) for (let c = 0; c < S8C; c++) {
+      const i = r * S8C + c, g = r === S8G[0] && c === S8G[1];
+      const st = r === S8S[0] && c === S8S[1], d = this.all.cell[i], kk = d > 0 && this.all.cell0[i] !== d;
+      h += `<div class="c${s8isD(r, c) ? ' d' : ''}${g ? ' g' : ''}${st ? ' s' : ''}${kk ? ' k' : ''}" data-i="${i}" style="left:${c * 50}px;top:${r * 50}px"><span>${st ? '출발' : d >= 0 ? d : ''}</span></div>`;
+    }
+    el.querySelector('.grd .cells').innerHTML = h;
+    this.cs = $$('.grd .c', el);
+    this.brk = this.all.path.findIndex(([r, c]) => s8isD(r, c));
+    const bp = this.all.path[this.brk];
+    this.bkCell = this.cs[bp[0] * S8C + bp[1]];
+    el.querySelector('.grd .tr').setAttribute('d', s8d(this.go.path));
+    const best = el.querySelector('.grd .best');
+    best.setAttribute('d', s8d(this.all.path)); this.bL = best.getTotalLength(); best.style.strokeDasharray = this.bL;
+    this.best = best;
+    el.querySelector('.tries').innerHTML = `<p>돌아가기<b>${this.go.len}번</b></p><p>1번 수비수 제치기<b>${t1.len}번</b></p><p class="qq">2번 수비수 제치기<b>…?</b></p><small>수비수 10명, 하나씩 다 해 봐야 할까?</small>`;
+    setTxt(el.querySelector('.res .r1'), `${Math.min(this.go.len, t1.len)}번 · 더 짧은 길이 있을까?`);
+    setTxt(el.querySelector('.res .r2 em'), `${this.all.len}번 · 수비수 1명 제치기`);
     setTxt(el.querySelector('.pr'), k.persona);
     el.querySelector('.hm-line').textContent = HINT;
-    this.why = '블록을 안 바꾼 지 30초';
-    setTxt(el.querySelector('.tt'), solved(HERO, 'lora') ? `${k.name}이가 스스로 고쳤어요` : `${k.name}이가 다시 해 보는 중`);
+    this.why = '손이 멈춘 지 30초';
+    setTxt(el.querySelector('.tt'), `${k.name}이가 스스로 방법을 찾았어요`);
+    this.cues = [
+      [4300, () => { flash('radial-gradient(circle at 50% 55%, rgba(255,80,85,.7), rgba(255,80,85,.12) 45%, transparent 72%)'); FX.burst(960, 600, RED, 110, 16); }],
+      [8300, () => { flash('radial-gradient(circle at 50% 55%, rgba(167,214,160,.75), rgba(167,214,160,.12) 45%, transparent 72%)'); FX.burst(960, 600, GREEN, 150, 18); }],
+      [S8T.path + 900, () => FX.burst(820, 470, GREEN, 80, 12)],
+      [S8T.lv3 + 100, () => FX.burst(1500, 820, GOLD, 90, 13)],
+    ];
   },
-  cues: [[4300, () => { flash('radial-gradient(circle at 50% 55%, rgba(255,80,85,.7), rgba(255,80,85,.12) 45%, transparent 72%)'); FX.burst(960, 600, RED, 110, 16); }],
-         [8300, () => { flash('radial-gradient(circle at 50% 55%, rgba(167,214,160,.75), rgba(167,214,160,.12) 45%, transparent 72%)'); FX.burst(960, 600, GREEN, 150, 18); }]],
   render(el, t) {
     cls(el.querySelector('.hc:not(.hc2)'), 'up', t >= 1300);
-    cls(el.querySelector('.hc:not(.hc2)'), 'x', t >= 9200);
-    cls(el.querySelector('.hc2'), 'v', t >= 9500);
+    cls(el.querySelector('.hc:not(.hc2)'), 'x', t >= S8T.hc - 300);
+    cls(el.querySelector('.hc2'), 'v', t >= S8T.hc);
     cls(el, 'rise', t >= 1400); cls(el, 'settle', t >= 3000 && t < 4300); cls(el, 'push', t >= 4300);
     const stop = t >= 2600 && t < 8300, pass = t >= 8300;
     cls(el, 'stop', stop); cls(el, 'blink', t >= 3300 && t < 4300); cls(el, 'modal', t >= 4300 && t < 8100); cls(el, 'hl', t >= 7500 && t < 8100);
-    cls(el, 'pass', pass);
+    cls(el, 'pass', pass); cls(el, 'tst', t >= 8300 && t < 9100);
+    cls(el, 'lv1', t >= S8T.lv1); cls(el, 'lv2', t >= S8T.lv2); cls(el, 'lv3', t >= S8T.lv3);
     setTxt(el.querySelector('.st-t'), pass ? '통과' : stop ? '멈춤' : '진행 중');
     setTxt(el.querySelector('.why'), pass ? '스스로 고침' : stop ? this.why : '');
-    setTxt(el.querySelector('.df'), pass ? '사랑하는 지안의' : '지안의');
     setSrc(el.querySelector('.tile .kid'), kidImg(HERO, pass ? 'happy' : stop ? 'sad' : ''));
+    // 시도 세 줄 · 돌아가는 길(점선)
+    $$('.tries p', el).forEach((x, q) => cls(x, 'v', t >= 700 + q * 800));
+    cls(el.querySelector('.grd .tr'), 'v', t >= 700 && t < S8T.wave);
+    cls(el.querySelector('.res .r0'), 'v', t >= 1500 && t < S8T.pass);
+    cls(el.querySelector('.res .r2'), 'v', t >= S8T.path + 900);
+    // 너비 우선 탐색: 출발점에서 가까운 칸부터 숫자가 퍼짐
+    const w = t - S8T.wave, mx = Math.max(...this.all.cell), L = w < 0 ? -1 : Math.min(mx, Math.floor(w / S8T.ws) + 1), on = L >= 1 && w < (mx + 2) * S8T.ws;
+    this.cs.forEach(c => { const d = this.all.cell[+c.dataset.i]; cls(c, 'n', d > 0 && d <= L); cls(c, 'f', on && d === L); });
+    cls(el.querySelector('.res .r3'), 'v', t >= S8T.wave && t < S8T.path + 700);
+    setTxt(el.querySelector('.res .lvn'), String(Math.max(0, L)));
+    // 가장 짧은 길을 그리며 공이 따라감, 제친 수비수에 노란 테두리
+    const q = smooth(S8T.path, S8T.path + 1300, t);
+    this.best.style.strokeDashoffset = this.bL * (1 - q);
+    const pt = q > 0 ? this.best.getPointAtLength(this.bL * q) : { x: s8xy(S8S)[0], y: s8xy(S8S)[1] };
+    el.querySelector('.grd .ball').style.transform = `translate(${pt.x.toFixed(1)}px,${pt.y.toFixed(1)}px)`;
+    cls(this.bkCell, 'bk', q >= this.brk / (this.all.path.length - 1) - .02);
   },
 };
 
